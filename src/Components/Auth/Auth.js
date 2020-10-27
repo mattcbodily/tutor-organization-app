@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import {connect} from 'react-redux';
+import {getUser} from '../../redux/reducer';
 
-export default props => {
+const Auth = props => {
     let [fullName, setFullName] = useState(''),
         [email, setEmail] = useState(''),
         [password, setPassword] = useState(''),
@@ -13,7 +15,8 @@ export default props => {
         if(password && password === verPassword){
             axios.post('/api/register', {fullName, email, password, tutor: true})
                 .then(res => {
-
+                    props.getUser(res.data);
+                    props.history.push('/dashboard');
                 })
                 .catch(err => console.log(err))
         }
@@ -23,7 +26,8 @@ export default props => {
         e.preventDefault();
         axios.post('/api/login', {email, password})
             .then(res => {
-
+                props.getUser(res.data);
+                props.history.push('/dashboard');
             })
             .catch(err => console.log(err))
     }
@@ -54,3 +58,5 @@ export default props => {
         </main>
     )
 }
+
+export default connect(null, {getUser})(Auth);
