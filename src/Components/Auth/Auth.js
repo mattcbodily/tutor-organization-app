@@ -45,13 +45,13 @@ const Auth = props => {
                         <>
                             <input type='password' value={verPassword} onChange={e => setVerPassword(e.target.value)}/>
                             <button onClick={e => register(e)}>Register</button>
-                            <p>Have an account? <span>Sign in here</span></p>   
+                            <p>Have an account? <span onClick={() => setRegisterView(false)}>Sign in here</span></p>   
                         </>
                     )
                     : (
                         <>
                             <button onClick={e => login(e)}>Log in</button>
-                            <p>Don't have an account? <span>Sign up here</span></p>
+                            <p>Don't have an account? <span onClick={() => setRegisterView(true)}>Sign up here</span></p>
                         </>
                     )}
             </form>
