@@ -9,5 +9,8 @@ create table if not exists users (
 create table if not exists tutor_student_junction (
     junction_id serial primary key,
     tutor_id int references users(user_id) not null,
-    student_id int references users(user_id) not null
+    student_id int references users(user_id) not null,
+    lesson_day varchar(10),
+    lesson_time varchar(10),
+    lesson_location varchar(200)
 );
