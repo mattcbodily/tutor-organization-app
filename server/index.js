@@ -3,6 +3,7 @@ const express = require('express'),
       session = require('express-session'),
       massive = require('massive'),
       authCtrl = require('./controllers/authController'),
+      studentCtrl = require('./controllers/studentController'),
       {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env,
       app = express();
 
@@ -27,3 +28,7 @@ massive({
 app.post('/api/register', authCtrl.register);
 app.post('/api/login', authCtrl.login);
 app.get('/api/logout', authCtrl.logout);
+
+//Student Endpoints
+app.get('/api/students/:id', studentCtrl.getStudents);
+app.post('/api/student', studentCtrl.addStudent);

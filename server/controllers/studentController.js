@@ -14,7 +14,7 @@ module.exports = {
         .catch(err => res.status(500).send(err));
     },
     addStudent: async(req, res) => {
-        const {fullName, email} = req.body,
+        const {fullName, email, id} = req.body,
               db = req.app.get('db');
 
         //need to create a random password, then insert the student info into the db
@@ -22,7 +22,8 @@ module.exports = {
             salt = bcrypt.genSaltSync(10),
             hash = bcrypt.hashSync(randStr, salt);
 
-        db.student.add_student({fullName, email, password: hash})
+        const studentId = await db.student.add_student({fullName, email, password: hash});
+        db.student.tutor_student_junction({id, studentId: studentId[0]});
         
         //need to send the student an email letting them know they've been added to the platform
         try {

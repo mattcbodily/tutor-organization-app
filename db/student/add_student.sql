@@ -8,4 +8,5 @@ insert into users (
     ${email},
     ${password},
     false
-);
+)
+returning user_id;
