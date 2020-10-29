@@ -1,8 +1,11 @@
 import React from 'react';
+import StudentList from '../StudentList/StudentList';
 
 const Dashboard = props => {
     return (
-        <main>Dashboard</main>
+        <main>
+            <StudentList />
+        </main>
     )
 }
 
