@@ -32,3 +32,4 @@ app.get('/api/logout', authCtrl.logout);
 //Student Endpoints
 app.get('/api/students/:id', studentCtrl.getStudents);
 app.post('/api/student', studentCtrl.addStudent);
+app.put('/api/student', studentCtrl.changePassword);

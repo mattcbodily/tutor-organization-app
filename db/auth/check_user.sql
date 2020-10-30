@@ -1,2 +1,3 @@
 select * from users
-where email = ${email};
+where email = ${email}
+or user_id = ${id};

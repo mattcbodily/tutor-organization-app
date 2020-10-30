@@ -56,6 +56,27 @@ module.exports = {
             res.status(500).send(err);
         }
     },
+    changePassword: async(req, res) => {
+        const {password, id} = req.body,
+              db = req.app.get('db');
+
+        const foundUser = await db.auth.check_user({id});
+        if(!foundUser[0]){
+            return res.status(400).send('No user')
+        }
+
+        const authenticated = bcrypt.compareSync(password, foundUser[0].password);
+        if(!authenticated){
+            return res.status(401).send('Old password is incorrect')
+        }
+
+        let salt = bcrypt.genSaltSync(10),
+            hash = bcrypt.hashSync(password, salt);
+
+        const newUser = db.student.change_password({password, id});
+        req.session.user = newUser[0];
+        res.status(200).send(req.session.user);
+    },
     removeStudent: (req, res) => {
         //This will remove a student and their accompanying information (schedule and notes)
     }
