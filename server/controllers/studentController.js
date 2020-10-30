@@ -55,6 +55,8 @@ module.exports = {
         } catch(err){
             res.status(500).send(err);
         }
+
+        res.sendStatus(200);
     },
     changePassword: async(req, res) => {
         const {password, id} = req.body,

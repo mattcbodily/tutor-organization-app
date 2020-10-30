@@ -3,7 +3,11 @@ import axios from 'axios';
 
 const StudentModal = props => {
     let [fullName, setFullName] = useState(''),
-        [email, setEmail] = useState('');
+        [email, setEmail] = useState('')
+        [lessonDay, setLessonDay] = useState('Monday'),
+        [lessonTime, setLessonTime] = useState(''),
+        [lessonLocation, setLessonLocation] = useState(''),
+        [lessonRate, setLessonRate] = useState('');
 
     const addStudent = (e) => {
         e.preventDefault()
