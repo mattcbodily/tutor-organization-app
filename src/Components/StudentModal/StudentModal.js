@@ -8,7 +8,7 @@ const StudentModal = props => {
     const addStudent = (e) => {
         e.preventDefault()
 
-        axios.post('/api/student', {fullName, email, id})
+        axios.post('/api/student', {fullName, email, id: props.id})
             .then(() => {
                 props.toggleFn(false);
             })

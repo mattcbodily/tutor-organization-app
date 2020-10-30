@@ -23,7 +23,7 @@ module.exports = {
             hash = bcrypt.hashSync(randStr, salt);
 
         const studentId = await db.student.add_student({fullName, email, password: hash});
-        db.student.tutor_student_junction({id, studentId: studentId[0]});
+        db.student.tutor_student_junction({id, studentId: studentId[0].user_id});
         
         //need to send the student an email letting them know they've been added to the platform
         try {
@@ -60,7 +60,7 @@ module.exports = {
         const {password, id} = req.body,
               db = req.app.get('db');
 
-        const foundUser = await db.auth.check_user({id});
+        const foundUser = await db.auth.check_user({email: null, id});
         if(!foundUser[0]){
             return res.status(400).send('No user')
         }

@@ -5,7 +5,7 @@ module.exports = {
         const {fullName, email, password, tutor} = req.body,
               db = req.app.get('db');
 
-        const foundUser = await db.auth.check_user({email});
+        const foundUser = await db.auth.check_user({email, id: null});
         if(foundUser[0]){
             return res.status(400).send('Email already in use');
         }
@@ -21,7 +21,7 @@ module.exports = {
         const {email, password} = req.body,
               db = req.app.get('db');
 
-        const foundUser = await db.auth.check_user({email});
+        const foundUser = await db.auth.check_user({email, id: null});
         if(!foundUser[0]){
             return res.status(400).send('Account not found');
         }
